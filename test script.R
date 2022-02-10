@@ -38,4 +38,22 @@ glimpse(bea_tidier)
 
 colSums(is.na(bea_tidier))
 
+str(bea_tidier)
 
+bea_clean <- bea_tidier %>%
+  mutate_at(vars(Year:`Private services-providing industries 3/`), 
+                 ~as.numeric(.))
+
+glimpse(bea_clean)
+
+bea_clean <- bea_clean %>%
+  rename(Mining = `  Mining, quarrying, and oil and gas extraction`,
+         Ag = `  Agriculture, forestry, fishing and hunting`)
+names(bea_clean)
+
+head(bea_clean)
+
+bea_clean <- bea_clean %>%
+  filter(GeoFIPS != " \"20000\"")
+
+head(bea_clean)
